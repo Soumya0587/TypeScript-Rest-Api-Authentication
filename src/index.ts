@@ -4,7 +4,7 @@ import bodyParser from "body-parser"
 import cookieparser from "cookie-parser"
 import compression from "compression"
 import cors from "cors"
-
+import mongoose from "mongoose"
 
 const app = express()
 
@@ -19,7 +19,11 @@ app.use(bodyParser.json())
 const server = http.createServer(app)
 
 server.listen(8080, ()=>{
-    console.log("server runnong at 8080");
+    console.log("server running at 8080");
     
 })
 
+const MONGO_URL = "mongodb+srv://soumya:soumya@cluster0.afkca2q.mongodb.net/typescriptapi?retryWrites=true&w=majority"
+mongoose.Promise = Promise
+mongoose.connect(MONGO_URL)
+mongoose.connection.on('error',(error: Error) => console.log(error))
